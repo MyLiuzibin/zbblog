@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <properties resource="generator/config.properties"/>
+
+<!--    不使用mybatis3  使用官方推荐的MyBatis3DynamicSql 注解版-->
+    <context id="mysqlTables" targetRuntime="MyBatis3DynamicSql" defaultModelType="flat">
+<!--        使用Lombok不生成 get set使用注解代替-->
+        <plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin" />
+
+<!--        用于在实体类中添加 equals 和 hashCode 方法-->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+<!--        用于在实体类中实现java.io.Serializable接口-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
+
+
+
+<!--        解决xml重复生成插件-->
+<!--        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />-->
+
+
+
+<!--        是否在代码中显示注释-->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+<!--        数据库连接信息-->
+        <jdbcConnection driverClass="${jdbc.driverClassName}"
+                        connectionURL="${jdbc.url}" userId="${jdbc.username}"
+                        password="${jdbc.password}" />
+
+<!--        生成model类的存放位置-->
+        <javaModelGenerator targetPackage="${package.model}" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+<!--        生成xml映射文件的存放位置-->
+<!--        <sqlMapGenerator targetPackage="mapper" targetProject="${package.xml}">-->
+<!--            <property name="enableSubPackages" value="true"/>-->
+<!--        </sqlMapGenerator>-->
+<!--        生成mapper类的存放文件-->
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${package.mapper}" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <table domainObjectName="ArticleComments" tableName="t_article_comments">
+        </table>
+        <table domainObjectName="ArticleContent" tableName="t_article_content">
+            <columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </table>
+        <table domainObjectName="Articles" tableName="t_articles">
+        </table>
+        <table domainObjectName="Comments" tableName="t_comments">
+        </table>
+        <table domainObjectName="Users" tableName="t_users">
+        </table>
+        <table domainObjectName="ArticleCollect" tableName="t_article_collect">
+        </table>
+        <table domainObjectName="ArticleLove" tableName="t_article_love">
+        </table>
+        <table domainObjectName="Collect" tableName="t_collect">
+        </table>
+        <table domainObjectName="Love" tableName="t_love">
+        </table>
+
+
+    </context>
+</generatorConfiguration>
